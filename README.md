@@ -4,15 +4,22 @@
 
 Установка
 
-1. Создайте виртуальное окружение и установите зависимости:
+1. Скачайте файлы, создайте виртуальное окружение и установите зависимости (каждая команда в новую строку):
 
 ```powershell
+git clone https://github.com/epobut/TGBotEnergyChecker.git
+cd TGBotEnergyChecker
 python -m venv .venv
+
+# Windows PowerShell
 .\.venv\Scripts\Activate.ps1
+# Linux / macOS
+source .venv/bin/activate
+
 pip install -r requirements.txt
 ```
 
-2. Отредактируйте файл `config.py` и вставьте свои значения `TARGETS`, `TELEGRAM_BOT_TOKEN` и `CHAT_ID`.
+2. Отредактируйте файл `config.py` и вставьте свои значения `TARGETS`, `BOT_TOKEN` и `CHAT_ID` (внизу простая инструкция, как их раздобыть).
 
 Дополнительно:
 
@@ -40,3 +47,36 @@ python bot.py
 - Если ваш внешний IP — приватный (CGNAT), можно воспользоваться DDNS или no-ip.
 - Бот пингует цель каждые `INTERVAL` секунд (по умолчанию 30).
 - В файл state.json пишется состояние мониторинга, чтоб вам не приходили каждый раз приветственные уведомления после перезапуска скрипта.
+
+1️⃣ Получение BOT_TOKEN
+
+1. Откройте Telegram и найдите бота @BotFather
+2. Отправьте команду /newbot и следуй инструкциям:
+3. Дайте имя боту (например, EnergyCheckerBot)
+4. Дайте уникальный username (например, EnergyCheckerBot123)
+5. В конце BotFather пришлёт сообщение с токеном — это и есть ваш BOT_TOKEN, что-то вроде:
+```powershell
+123456789:ABCdefGHIjkl-MNOPqrSTUvwxYZ
+```
+Сохраните его, он понадобится в config.py.
+
+2️⃣ Получение CHAT_ID
+
+Есть два способа:
+Способ A — с помощью бота userinfobot
+1. Найдите в Telegram @userinfobot
+2. Нажмите «Start», он покажет ваш chat_id — число (например, 987654321).
+
+Способ B — через Telegram API
+1. Отправьте любое сообщение своему боту.
+2. Откройте браузер и вставьте ссылку, заменив BOT_TOKEN:
+```powershell
+https://api.telegram.org/bot<BOT_TOKEN>/getUpdates
+```
+3. В JSON-ответе ищите поле chat → id. Это и есть CHAT_ID.
+
+Теперь эти значения можно вставить в config.py:
+```powershell
+BOT_TOKEN = "тут_ваш_token"
+CHAT_ID = 987654321
+```

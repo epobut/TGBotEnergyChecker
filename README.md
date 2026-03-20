@@ -1,82 +1,38 @@
-# EnergyChecker
+# 🔋 TGBotEnergyChecker
 
-Простой бот, который проверяет доступность внешнего IP вашего роутера/роутеров и отправляет уведомления в Telegram при отключениях питания. Можно использовать в локальной сети для мониторинга присутствия босса😊
+[UA] Простий Python-скрипт для моніторингу наявності електроенергії або інтернету через Telegram бот.
+[EN] A simple Python script to monitor power or internet availability via Telegram bot.
 
-Установка
+---
 
-1. Скачайте файлы, создайте виртуальное окружение и установите зависимости (каждая команда в новую строку):
+## ⚡ Як це працює? / How it works?
 
-```powershell
-git clone https://github.com/epobut/TGBotEnergyChecker.git
-cd TGBotEnergyChecker
-python -m venv .venv
+### 🇺🇦 Українською:
+Скрипт постійно пінгує (ping) задану IP-адресу або домен. Якщо хост перестає відповідати — ви отримуєте сповіщення про вимкнення світла. Коли зв'язок повертається — приходить повідомлення про увімкнення.
+- **Анти-спам:** Повідомлення надсилається лише після кількох невдалих/вдалих спроб поспіль (налаштовується).
+- **Тихий режим:** Можна задати години, коли бот не буде вас турбувати.
+- **Кілька цілей:** Моніторинг кількох об'єктів одночасно.
 
-# Windows PowerShell
-.\.venv\Scripts\Activate.ps1
-# Linux / macOS
-source .venv/bin/activate
+---
 
-pip install -r requirements.txt
-```
+### 🇺🇸 English:
+The script continuously pings a specified IP address or domain. If the host stops responding, you receive a "Power Down" notification. Once it's back, you get a "Power Up" alert.
+- **Anti-spam:** Notifications are sent only after a certain threshold of failed/successful pings (configurable).
+- **Silent Hours:** Set a time range when the bot stays quiet.
+- **Multi-target:** Monitor several locations or devices at once.
 
-2. Отредактируйте файл `config.py` и вставьте свои значения `TARGETS`, `BOT_TOKEN` и `CHAT_ID` (внизу простая инструкция, как их раздобыть).
+---
 
-Дополнительно:
+## 🚀 Налаштування / Setup
 
-- `ALERT_ON` / `ALERT_OFF` — опциональные шаблоны уведомлений. Используйте
-	`{time}` и `{target}` как плейсхолдеры.
- - `INTERVAL_DEFAULT` — интервал проверки в секундах (по умолчанию 30).
- - `TARGETS` — Формат: "имя:ip", разделенные запятой, мониторить можно любое количество техники. Если хотите другие иконки, подставьте свои в TARGET_TAG_
+1. Створіть бота через [@BotFather](https://t.me) та отримайте **Token**.
+2. Дізнайтеся свій **Chat ID**.
+3. Налаштуйте файл `config.py` (або змінні оточення):
+   - `TARGETS`: `Name:IP:Interval` (наприклад, `Home:1.2.3.4:60`)
+   - `BOT_TOKEN` & `CHAT_ID`
+   - `FAIL_THRESHOLD`: скільки пінгів пропустити перед алярмом.
 
-
-Запуск
-
-```powershell
-python bot.py
-```
-
-Файлы
-
-- `bot.py` — главный скрипт.
-- `config.py` — содержит `TELEGRAM_BOT_TOKEN` и `CHAT_ID`.
-- `requirements.txt` — зависимости.
-
-
-Примечания
-
-- Если ваш внешний IP — приватный (CGNAT), можно воспользоваться DDNS или no-ip.
-- Бот пингует цель каждые `INTERVAL` секунд (по умолчанию 30).
-- В файл state.json пишется состояние мониторинга, чтоб вам не приходили каждый раз приветственные уведомления после перезапуска скрипта.
-
-1️⃣ Получение BOT_TOKEN
-
-1. Откройте Telegram и найдите бота @BotFather
-2. Отправьте команду /newbot и следуй инструкциям:
-3. Дайте имя боту (например, EnergyCheckerBot)
-4. Дайте уникальный username (например, EnergyCheckerBot123)
-5. В конце BotFather пришлёт сообщение с токеном — это и есть ваш BOT_TOKEN, что-то вроде:
-```powershell
-123456789:ABCdefGHIjkl-MNOPqrSTUvwxYZ
-```
-Сохраните его, он понадобится в config.py.
-
-2️⃣ Получение CHAT_ID
-
-Есть два способа:
-Способ A — с помощью бота userinfobot
-1. Найдите в Telegram @userinfobot
-2. Нажмите «Start», он покажет ваш chat_id — число (например, 987654321).
-
-Способ B — через Telegram API
-1. Отправьте любое сообщение своему боту.
-2. Откройте браузер и вставьте ссылку, заменив BOT_TOKEN:
-```powershell
-https://api.telegram.org/bot<BOT_TOKEN>/getUpdates
-```
-3. В JSON-ответе ищите поле chat → id. Это и есть CHAT_ID.
-
-Теперь эти значения можно вставить в config.py:
-```powershell
-BOT_TOKEN = "тут_ваш_token"
-CHAT_ID = 987654321
-```
+4. **Запуск:**
+```bash
+pip install requests ping3
+python main.py

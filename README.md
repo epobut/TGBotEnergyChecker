@@ -8,31 +8,26 @@
 ## ⚡ Як це працює? / How it works?
 
 ### 🇺🇦 Українською:
-Скрипт постійно пінгує (ping) задану IP-адресу або домен. Якщо хост перестає відповідати — ви отримуєте сповіщення про вимкнення світла. Коли зв'язок повертається — приходить повідомлення про увімкнення.
-- **Анти-спам:** Повідомлення надсилається лише після кількох невдалих/вдалих спроб поспіль (налаштовується).
-- **Тихий режим:** Можна задати години, коли бот не буде вас турбувати.
-- **Кілька цілей:** Моніторинг кількох об'єктів одночасно.
+Скрипт пінгує (ping) задану IP-адресу або домен. Якщо хост не відповідає — ви отримуєте сповіщення про вимкнення світла. Коли зв'язок повертається — приходить повідомлення про увімкнення.
+
+- **Анти-спам:** Повідомлення надсилається лише після кількох невдалих/вдалих спроб поспіль.
+- **Тихий режим:** Можна задати години (наприклад, 23-07), коли бот не буде вас турбувати.
+- **Кілька об'єктів:** Моніторинг кількох адрес одночасно через одну конфігурацію.
 
 ---
 
 ### 🇺🇸 English:
-The script continuously pings a specified IP address or domain. If the host stops responding, you receive a "Power Down" notification. Once it's back, you get a "Power Up" alert.
-- **Anti-spam:** Notifications are sent only after a certain threshold of failed/successful pings (configurable).
-- **Silent Hours:** Set a time range when the bot stays quiet.
-- **Multi-target:** Monitor several locations or devices at once.
+The script pings a specified IP address or domain. If the host stops responding, you receive a "Power Down" alert via Telegram. Once connection is restored, you get a "Power Up" notification.
+
+- **Anti-spam:** Alerts are sent only after a configurable threshold of failed/successful pings.
+- **Silent Hours:** Set a time range (e.g., 23-07) to disable notifications during the night.
+- **Multi-target:** Monitor several devices or locations simultaneously.
 
 ---
 
-## 🚀 Налаштування / Setup
+## 🚀 Швидкий старт / Quick Start
 
-1. Створіть бота через [@BotFather](https://t.me) та отримайте **Token**.
-2. Дізнайтеся свій **Chat ID**.
-3. Налаштуйте файл `config.py` (або змінні оточення):
-   - `TARGETS`: `Name:IP:Interval` (наприклад, `Home:1.2.3.4:60`)
-   - `BOT_TOKEN` & `CHAT_ID`
-   - `FAIL_THRESHOLD`: скільки пінгів пропустити перед алярмом.
-
-4. **Запуск:**
-```bash
-pip install requests ping3
-python main.py
+1. **Клонуйте репозиторій:**
+   ```bash
+   git clone https://github.com
+   cd TGBotEnergyChecker

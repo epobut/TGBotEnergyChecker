@@ -1,0 +1,20 @@
+# Telegram settings
+BOT_TOKEN = "123456789:ABCDEF..."
+CHAT_ID = "987654321"
+
+# Monitoring targets (Name:IP/Host:Interval_in_seconds)
+# Example: "Home:192.168.1.1:60,Office:8.8.8.8:30"
+TARGETS = "Home:8.8.8.8:60"
+
+# Thresholds (how many checks to wait before alert)
+FAIL_THRESHOLD = 3
+SUCCESS_THRESHOLD = 2
+
+# General settings
+INTERVAL_DEFAULT = 60
+SILENT_HOURS = "23-07"  # No alerts from 23:00 to 07:00
+
+# Message templates
+ALERT_FIRST = "📡 <b>{name}</b> ({host}) Monitoring started. Current state: {state}"
+ALERT_ON = "✅ <b>{name}</b> ({host}) is UP! {tag}"
+ALERT_OFF = "❌ <b>{name}</b> ({host}) is DOWN! {tag}"

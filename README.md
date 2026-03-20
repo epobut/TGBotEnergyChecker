@@ -5,17 +5,23 @@
 
 ---
 
-## ⚡ Як це працює? / How it works?
+## ⚡ How it works / Як це працює
 
 ### 🇺🇦 Українською
-Скрипт постійно пінгує задану IP-адресу або домен. Якщо хост перестає відповідати — ви отримуєте сповіщення про вимкнення світла. Коли зв'язок повертається — приходить повідомлення про увімкнення.
 
-- Анти-спам: повідомлення надсилається лише після кількох невдалих або вдалих спроб поспіль  
-- Тихий режим: можна задати години (23:00–07:00)  
-- Кілька цілей: моніторинг кількох об'єктів одночасно  
+Скрипт постійно пінгує задану IP-адресу або домен.  
+Якщо хост перестає відповідати — ви отримуєте сповіщення про вимкнення світла.  
+Коли зв'язок повертається — приходить повідомлення про увімкнення.
+
+- Анти-спам: повідомлення тільки після кількох спроб підряд  
+- Тихий режим: 23:00–07:00 (налаштовується)  
+- Кілька цілей: моніторинг кількох хостів  
 
 ### 🇺🇸 English
-The script continuously pings a specified IP or domain. If the host stops responding, you get a "Power Down" alert. When it's back — "Power Up".
+
+The script continuously pings a target (IP/domain).  
+If it goes offline — you get a "Power Down" alert.  
+When it comes back — "Power Up".
 
 - Anti-spam threshold  
 - Silent hours (23:00–07:00)  
@@ -25,32 +31,65 @@ The script continuously pings a specified IP or domain. If the host stops respon
 
 ## 🚀 Quick Start
 
-### Clone
+### 1. Clone repo
+
+```bash
 git clone https://github.com/your-username/TGBotEnergyChecker.git
 cd TGBotEnergyChecker
+```
 
-### Install
+### 2. Install dependencies
+
+```bash
 pip install requests ping3
+```
 
-### Config
+### 3. Setup config
+
+```bash
 cp config.py.example config.py
+```
 
-Edit:
-- BOT_TOKEN
-- CHAT_ID
-- TARGETS
+Edit `config.py`:
 
-### Run
+```python
+BOT_TOKEN = "your_token"
+CHAT_ID = "your_chat_id"
+
+TARGETS = [
+    {"name": "Home Router", "host": "192.168.1.1"},
+    {"name": "Google", "host": "8.8.8.8"}
+]
+```
+
+### 4. Run
+
+```bash
 python main.py
+```
 
 ---
 
 ## 🛠 Tech Info
+
 - Python 3.x  
-- requests, ping3  
-- state.json prevents duplicate alerts  
+- Libraries: `requests`, `ping3`  
+- State stored in `state.json` (no duplicate alerts after restart)
+
+---
+
+## 📝 GitHub Settings
+
+**Description:**
+Telegram bot for monitoring power and internet connectivity with instant alerts.
+
+**Topics:**
+```
+telegram-bot python monitoring power-monitor ping uptime-checker networking iot
+```
 
 ---
 
 ## 🛡 Disclaimer
-For personal use only. No ответственности for missed alerts.
+
+For personal use only. No responsibility for missed alerts.
